@@ -19,9 +19,7 @@ export default {
           { text: 'Introducción', link: '/guide/intro' },
           { text: 'Docker', link: '/guide/docker' },
           { text: 'Ejemplo Sencillo', link: '/guide/simple-example' },
-          { text: 'Modo Desarrollo', link: '/guide/development-mode' },
-          { text: 'Modo Prueba', link: '/guide/test-mode' },
-          { text: 'Modo Produción', link: '/guide/production-mode' },
+          { text: 'Environment Description', link: '/guide/env-desc' },
           { text: 'Conclusión', link: '/guide/conclusion' },
         ]
       }
