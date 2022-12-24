@@ -8,7 +8,7 @@ Sin duda, el tema de la contenerización es muy extenso y solo hemos cubierto un
 
 >Estaremos encantados si este artículo se convierte en un punto de partida para el desarrollo _**FrontEnd**_ (con Vue) en _**Docker**_.
 
-![conclusion](./img/logo.png)
+![conclusion](./img/laravel2.png)
 
 
 
