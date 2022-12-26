@@ -117,10 +117,6 @@ COPY ./default.conf /etc/nginx/conf.d/default.conf
 ## `default.conf`
 
 ```bash
-upstream php_service {
-  server appname_php:9000;
-}
-
 server {
   listen 80;
   server_name localhost;
@@ -135,9 +131,8 @@ server {
   }
 
   location ~ \.php$ {
-      #try_files $uri =404;
       fastcgi_split_path_info ^(.+\.php)(/.+)$;
-      fastcgi_pass php_service;
+      fastcgi_pass appname_php:9000;
       fastcgi_index index.php;
       include fastcgi_params;
       fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
