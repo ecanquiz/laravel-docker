@@ -2,6 +2,73 @@
 
 ## `./docker-compose.yml`
 
+El archivo `./docker-compose.yml` es un archivo YAML que define servicios, redes y volúmenes para una aplicación Docker.
+
+>[YAML](https://yaml.org/) es un lenguaje de serialización de datos fácil de usar para todos los lenguajes de programación.
+
+
+Avancemos y construyamos dicho archivo en la raíz de nuestro proyecto Laravel. Tenga en cuenta que estamos estableciendo dos (2) bloques: `services` y `networks` respectivamente.
+
+```bash
+version: "3.9"
+services:  
+  php_appname:
+    # omitted for brevity ...
+ 
+  nginx_appname:
+    # omitted for brevity ...
+
+  pgsql_appname:
+    # omitted for brevity ...
+
+networks:
+    # omitted for brevity ...
+
+```
+
+En el primer bloque establecemos los servicios básicos que necesitamos para levantar una aplicación Laravel. En este caso, PHP, Nginx y PostgreSQL.
+
+>Ya sabemos que Nginx pudiera ser sustituido por Apache2; y PostgreSQL, por MySQL por ejemplo.
+
+Tenga en cuenta, que para seguir un _standar_, usaremos la palabra `appname` como nombre de la aplicación. Así que sientase libre de cambiarlo si así lo desea.
+
+Empecemos con el servicio `php_appname`.
+
+## `php_appname`
+
+```bash{3,4,5,6,7,8,9,10,11,12,13,14,15}
+version: "3.9"
+services:  
+  php_appname:
+    build:
+      context: .
+      dockerfile: Dockerfile    
+    container_name: appname_php
+    restart: unless-stopped
+    tty: true
+    working_dir: /var/www/html/
+    volumes:
+      - ./:/var/www/html/
+      - ./php/laravel.ini:/usr/local/etc/php/conf.d/laravel.ini
+    networks:
+      - appname-network
+ 
+  nginx_appname:
+    # omitted for brevity ...
+
+  pgsql_appname:
+    # omitted for brevity ...
+
+networks:
+  # omitted for brevity ...
+```
+
+/////////////////////////////
+
+
+
+
+
 ```bash
 version: "3.9"
 services:  
@@ -88,9 +155,6 @@ RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 RUN docker-php-ext-install mbstring zip exif pcntl
 RUN docker-php-ext-install pdo pgsql pdo_pgsql
 RUN docker-php-ext-install gd
-
-#RUN docker-php-ext-install pdo_mysql
-#RUN docker-php-ext-install gd
 
 # Install composer (php package manager)
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
