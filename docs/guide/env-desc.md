@@ -30,11 +30,11 @@ En el primer bloque establecemos los servicios básicos que necesitamos para lev
 
 >Ya sabemos que Nginx pudiera ser sustituido por Apache2; y PostgreSQL, por MySQL por ejemplo.
 
-Tenga en cuenta, que para seguir un _standar_, usaremos la palabra `appname` como nombre de la aplicación. Así que sientase libre de cambiarlo si así lo desea.
+Para seguir un _standar_, usaremos la palabra `appname` como nombre de la aplicación. Así que sientase libre de cambiarlo si así lo desea.
+
+## El servicio PHP
 
 Empecemos con el servicio `php_appname`.
-
-## `php_appname`
 
 ```bash{3,4,5,6,7,8,9,10,11,12,13,14,15}
 version: "3.9"
@@ -44,7 +44,7 @@ services:
       context: .
       dockerfile: Dockerfile    
     container_name: appname_php
-    restart: unless-stopped
+    # restart: always
     tty: true
     working_dir: /var/www/html/
     volumes:
@@ -63,11 +63,49 @@ networks:
   # omitted for brevity ...
 ```
 
-/////////////////////////////
+Tenga en cuenta lo siguiente:
 
+- El contexto del servicio `php_appname` se establece en la raiz del proyecto. Por lo que será descrito en el archivo `Dockerfile` que está ubicado directamente en la misma carpeta.
+- Este contenedor se llamará `appname_php`.
+- Una vez que agregue un `tty: true` al contenedor, `bash` podrá crear una sesión interactiva.
+- El directorio de trabajo será `/var/www/html/`
+- En `volumes` establecemos las carpetas que serán espejo:
+    - `./` espejo de `/var/www/html/`
+    - `./php/laravel.ini` espejo de `/usr/local/etc/php/conf.d/laravel.ini`.
+- el servicio será expuesto por la red `appname-network`.
 
+## El servicio Nginx
 
+Avancemos con el servicio `nginx_appname`.
 
+```bash{6,7,8,9,10,11,12,13,14,15,16,17,18}
+version: "3.9"
+services:  
+  php_appname:
+    # omitted for brevity ...
+ 
+  nginx_appname:
+    depends_on:
+      - php_appname
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    container_name: appname_nginx
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "80:80"
+    networks:
+      - appname-network
+
+  pgsql_appname:
+    # omitted for brevity ...
+
+networks:
+  # omitted for brevity ...
+```
+
+////////////////////////////////////////////
 
 ```bash
 version: "3.9"
@@ -120,6 +158,10 @@ networks:
   appname-network:
     driver: bridge
 ```
+
+
+
+
 
 ## `./Dockerfile`
 
