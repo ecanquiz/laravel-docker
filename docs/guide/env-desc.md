@@ -72,7 +72,7 @@ Tenga en cuenta lo siguiente:
 - En `volumes` establecemos las carpetas que serán espejo:
     - `./` espejo de `/var/www/html/`
     - `./php/laravel.ini` espejo de `/usr/local/etc/php/conf.d/laravel.ini`.
-- el servicio será expuesto por la red `appname-network`.
+- El servicio será expuesto por la red `appname-network`.
 
 ## El servicio Nginx
 
@@ -91,7 +91,7 @@ services:
       context: ./nginx
       dockerfile: Dockerfile
     container_name: appname_nginx
-    restart: unless-stopped
+    # restart: always
     tty: true
     ports:
       - "80:80"
@@ -103,6 +103,76 @@ services:
 
 networks:
   # omitted for brevity ...
+```
+
+Tenga en cuenta lo siguiente:
+
+- El servicio `nginx_appname` depende del servicio `php_appname`.
+- Para el `build` declaramos lo siguiente:
+  - El `context` de este servicio está ubicado en la carpeta `./nginx`.
+  - En la carpeta `./nginx` hay un `Dockerfile` particular.
+- Este contenedor se llamará `appname_nginx`.
+- Al establecer `tty: true` al contenedor, `bash` podrá crear una sesión interactiva.
+- Saldrá por el puerto `80`.
+- El servicio también será expuesto por la red `appname-network`.
+
+## El servicio PgSql
+
+Avancemos con el servicio `pgsql_appname`.
+
+```bash{9,10,11,12,13,14,15,16,17,18,19,20,21,22,23}
+version: "3.9"
+services:  
+  php_appname:
+    # omitted for brevity ...
+ 
+  nginx_appname:
+    # omitted for brevity ...
+
+  pgsql_appname:
+    container_name: appname_pgsql
+    image: postgres:13
+    ports:
+      - "${DB_PORT}:5432"
+    environment:
+      POSTGRES_DB: ${DB_DATABASE}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - "./postgresql:/var/lib/postgresql/data"
+    networks:
+      - appname-network
+    healthcheck:
+      test: ["CMD", "pg_isready", "-q", "-d", "${DB_DATABASE}", "-U", "${DB_USERNAME}"]
+
+networks:
+  # omitted for brevity ...
+```
+
+////////////////////////////////////////////
+
+```bash{5,6,10,11,15,16,19,20,21}
+version: "3.9"
+services:  
+  php_appname:
+    # omitted for brevity ...
+    networks:
+      - appname-network
+ 
+  nginx_appname:
+    # omitted for brevity ...
+    networks:
+      - appname-network
+
+  pgsql_appname:
+    # omitted for brevity ...
+    networks:
+      - appname-network
+    # omitted for brevity ...
+
+networks:
+  appname-network:
+    driver: bridge
 ```
 
 ////////////////////////////////////////////
@@ -158,9 +228,6 @@ networks:
   appname-network:
     driver: bridge
 ```
-
-
-
 
 
 ## `./Dockerfile`
