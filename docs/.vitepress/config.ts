@@ -27,7 +27,7 @@ export default defineConfig({
       }
     ],
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/CaribesTIC/vue-laravel' }
+      { icon: 'github', link: 'https://github.com/CaribesTIC/laravel-docker' }
     ]
   }
 })
