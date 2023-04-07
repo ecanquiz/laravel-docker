@@ -1,21 +1,21 @@
 ---
+# https://vitepress.dev/reference/default-theme-home-page
 layout: home
 
 hero:
-  name: Laravel-Docker
-  text: Cultura DepOps
-  tagline: Dockerizando Laravel
+  name: "Laravel-Docker"
+  text: "Cultura DepOps"
+  tagline: "Dockerizando Laravel"
   image:
     src: /logo.png
-    alt: Vue-Docker
+    alt: Laravel-Docker
   actions:
     - theme: brand
       text: Comenzar
       link: /guide/intro
     - theme: alt
-      text: GitHub
-      link: https://github.com/CaribesTIC/vue-docker
-      
+      text: CaribesTIC
+      link: https://caribestic.github.io/
 
 features:
   - title: Docker
@@ -28,4 +28,6 @@ features:
     details: Pruebas durante el desarrollo.    
 footer: MIT Licensed | Copyleft © 2022-present Ernesto Canquiz
 ---
+
+
 
