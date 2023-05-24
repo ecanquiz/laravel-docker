@@ -10,7 +10,7 @@ export default defineConfig({
     nav: [
       { text: 'Inicio', link: '/' },           
       { text: 'Comenzar', link: '/guide/intro' },
-      { text: 'CaribesTIC', link: 'https://caribestic.github.io/' }, 
+      { text: 'ecanquiz', link: 'https://ecanquiz.github.io/' }, 
     ],
     sidebar: [
       {
@@ -27,7 +27,7 @@ export default defineConfig({
       }
     ],
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/CaribesTIC/laravel-docker' }
+      { icon: 'github', link: 'https://github.com/ecanquiz/laravel-docker' }
     ]
   }
 })

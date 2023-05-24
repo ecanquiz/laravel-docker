@@ -14,8 +14,8 @@ hero:
       text: Comenzar
       link: /guide/intro
     - theme: alt
-      text: CaribesTIC
-      link: https://caribestic.github.io/
+      text: ecanquiz
+      link: https://ecanquiz.github.io/
 
 features:
   - title: Docker

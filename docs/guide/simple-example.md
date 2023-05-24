@@ -5,11 +5,11 @@
 >Usaremos la plantilla habitual para [proyectos Laravel](https://laravel.com/docs/9.x/installation#your-first-laravel-project). 
 
 Agregaremos 4 archivos nuevos:
-- [`./docker-compose.yml`](https://github.com/ejimenez123/docker-laravel-example/blob/main/docker-compose.yml)
-- [`./Dockerfile`](https://github.com/ejimenez123/docker-laravel-example/blob/main/Dockerfile)
-- [`./nginx/Dockerfile`](https://github.com/ejimenez123/docker-laravel-example/blob/main/nginx/Dockerfile)
-- [`./nginx/default.conf`](https://github.com/ejimenez123/docker-laravel-example/blob/main/nginx/default.conf)
+- [`./docker-compose.yml`](https://github.com/ecanquiz/docker-laravel-example/blob/main/docker-compose.yml)
+- [`./Dockerfile`](https://github.com/ecanquiz/docker-laravel-example/blob/main/Dockerfile)
+- [`./nginx/Dockerfile`](https://github.com/ecanquiz/docker-laravel-example/blob/main/nginx/Dockerfile)
+- [`./nginx/default.conf`](https://github.com/ecanquiz/docker-laravel-example/blob/main/nginx/default.conf)
 
 :::info
-El código completo del ejemplo [aquí](https://github.com/ejimenez123/docker-laravel-example).
+El código completo del ejemplo [aquí](https://github.com/ecanquiz/docker-laravel-example).
 :::
