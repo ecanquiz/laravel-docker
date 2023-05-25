@@ -1,0 +1,1 @@
+import{_ as s,c as n,o as a,N as l}from"./chunks/framework.f52e5230.js";const F=JSON.parse('{"title":"Descripción del Ambiente","description":"","frontmatter":{},"headers":[],"relativePath":"guide/env-desc.md"}'),p={name:"guide/env-desc.md"},o=l("",32),e=[o];function t(c,r,C,y,i,A){return a(),n("div",null,e)}const d=s(p,[["render",t]]);export{F as __pageData,d as default};
