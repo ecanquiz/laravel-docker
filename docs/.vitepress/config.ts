@@ -7,6 +7,7 @@ export default defineConfig({
   base: '/laravel-docker/', //  The default path during deployment / secondary address / base can be used/
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
+    logo: '/mylogo.png',
     nav: [
       { text: 'Inicio', link: '/' },           
       { text: 'Comenzar', link: '/guide/intro' },
